@@ -4,7 +4,9 @@ import { CreateMonitorFormData, CreateMonitorSchema, Monitor } from "../../types
 import { createMonitor } from "../../api/monitor";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { Button, TextField, MenuItem, Box } from "@mui/material";
+import { Button, TextField, MenuItem, Box, Container } from "@mui/material";
+import { Header } from "../header";
+import { motion } from "framer-motion";
 
 export const CreateMonitorForm = () => {
   const queryClient = useQueryClient();
@@ -27,7 +29,15 @@ export const CreateMonitorForm = () => {
   };
 
   return (
+    <motion.div
+    initial={{ opacity: 0, y: -50 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+  >
+    <Header />
+    <Container>
     <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ maxWidth: 400, mx: "auto", mt: 4 }}>
+      
       <TextField
         {...register("name")}
         label="Monitor Name"
@@ -82,5 +92,7 @@ export const CreateMonitorForm = () => {
         Create Monitor
       </Button>
     </Box>
+    </Container>
+    </motion.div>
   );
 };
